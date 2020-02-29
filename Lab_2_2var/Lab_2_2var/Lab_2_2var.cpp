@@ -28,8 +28,9 @@ int main()
     while(fin_2 >> Buff_2)
         count++;
 
-    printf("count = %d", count);
+    printf("count = %d\n", count);
 
     fin.close();
+    system("pause");
 }
 

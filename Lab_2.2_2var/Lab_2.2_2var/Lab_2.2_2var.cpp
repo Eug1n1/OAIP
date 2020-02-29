@@ -32,8 +32,9 @@ int main()
                 for (int i = 0; i < 30; i++)
                     min[i] = Buff_2[i];
         }
-    printf("min: %s", min);
+    printf("min: %s\n", min);
 
     fin.close();
+    system("pause");
 }
 
