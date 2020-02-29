@@ -17,7 +17,7 @@ struct Students
 };
 
 struct Students listOfStudents[ArrSize];
-struct Students eriser;
+struct Students eraser;
 
 int size = 0;
 
@@ -90,7 +90,24 @@ void add() {
 }
 
 void del() {
-
+    char choice[255];
+    printf("\n\t\tEnter a teacher's surname:\t");
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    gets_s(choice, 255);
+    if (strcmp(choice, "ALL") != 0) {
+        for (int i = 0; i < size; i++)
+            if (strcmp(choice, listOfStudents[i].name) == 0) {
+                for (int j = i; j < size; j++)
+                    listOfStudents[j] = listOfStudents[j + 1];
+                size--;
+            }
+    }
+    else {
+        for (int i = 0; i < size; i++)
+            listOfStudents[i] = eraser;
+        size = 0;
+    }
+    printf("\n\t\tCOMPLETE\n\t\t");
 }
 
 void change() {
