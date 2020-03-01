@@ -44,15 +44,16 @@ void output() {
     std::cin >> choice;
     switch (choice) {
     case 1: {
-        char NChoice[50];
+        char NChoice[255];
         printf("\n\n\t\tPlease enter a teacher's surname:\t");
-        std::cin >> NChoice;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        gets_s(NChoice);
         for (int i = 0; i < size; i++) {
             if (strcmp(NChoice, listOfStudents[i].name) == 0) {
                 printf("\n\t\t........REPORT........\n\t\tStudent's number: %d\n\t\tStudent's name: %s\n\t\tExamination number: %d\n\t\texamination rating:\n\t\t", i + 1, listOfStudents[i].name, listOfStudents[i].numExams);
                 for (int j = 0; j < listOfStudents[i].numExams; j++)
                     printf("%d ", listOfStudents[i].examScore[j]);
-                printf("\n\t\t......................");
+                printf("\n\t\t......................\n\n");
             }
         }
     } break;
@@ -111,9 +112,58 @@ void del() {
 }
 
 void change() {
+    char choice[255];
+    int ParChoice;
+    printf("\n\t\tEnter a student's name:\t");
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    gets_s(choice);
+    for (int i = 0; i < size; i++) {
+        if (strcmp(listOfStudents[i].name, choice) == 0) {
+            do
+            {
+                printf("\n\t\tEnter:\n\t\t1 - to change name\n\t\t2 - to change number of exams\n\t\t3 - to change exam marks\n\t\t4 - to finish changing\n\t\tChoice:\t");
+                std::cin >> ParChoice;
+                switch (ParChoice) {
 
+                case 1: {
+                    printf("\n\t\tEnter new name: ");
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    gets_s(listOfStudents[i].name);
+                } break;
+
+                case 2: {
+                    printf("\n\t\tEnter new number of exams: ");
+                    std::cin >> listOfStudents[i].numExams;
+                } break;
+
+                case 3:
+                {
+                    printf("\n\t\tEnter new exam marks:\n");
+                    for (int j = 0; j < listOfStudents[i].numExams; j++) {
+                        printf("\t\t%d: ", j + 1);
+                        std::cin >> listOfStudents[i].examScore[j];
+                    }
+
+                }break;
+                case 4: break;
+                default: printf("incorrent value!"); break;
+                }
+            } while (ParChoice != 4);
+        }
+    }
 }
 
 void stat() {
-
+    float count = 0;
+    float countStudents = 0;
+    for (int i = 0; i < size; i++) {
+        count = 0;
+        for (int j = 0; j < listOfStudents[i].numExams; j++) {
+            if (listOfStudents[i].examScore[j] > 8)
+                count++;
+            if (j + 1 == listOfStudents[i].numExams && count == listOfStudents[i].numExams)
+                countStudents++;
+        }
+    }
+    printf("\n\t\t.....STATISTICS.....\n\t\tStudent performance: %10.2f %%\n\t\t....................\n\n", (countStudents / (size)) * 100);
 }
