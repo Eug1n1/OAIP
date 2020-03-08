@@ -22,7 +22,7 @@ int main() {
 	for (int i = 0; i < strlen(Buff); i++) {
 		for (int j = 0; j < strlen(Arr); j++)
 			if (Buff[i] == Arr[j]) 
-				printf("A[%d] = %c", i, Buff[i]);
+				printf("A[%d] = %c\n", i, Buff[i]);
 
 	}
 }
