@@ -1,26 +1,39 @@
 ﻿#include <iostream>
+#include <fstream>
 
 #define ArrSize 50
+
+using std::ofstream;
+using std::ifstream;
 
 struct Teachers
 {
     char teachersSurname[50];
     char examTitle[50];
     char examDate[10];
+
+    void write() {
+        ofstream fout("save.txt", ofstream::app);
+        fout.write((char*)this, sizeof(Teachers));
+        fout.close();
+    }
 };
 
 struct Teachers listOfTeachers[50];
 struct Teachers eraser;
 
-int size;
+int size = 0;
 
 void add();
 void del();
 void change();
 void output();
+void readList();
 
 int main()
 {
+    readList();
+
     while (true) {
         int choice;
         printf("\n\t\t\tPRESS:\n\t\t1 - to get information\n\t\t2 - to add\n\t\t3 - to change informaton\n\t\t4 - to delete information\n\t\t5 - to exit\n\t\tCHOICE:\t");
@@ -33,6 +46,15 @@ int main()
         case 5: exit(0); break;
         default: printf("incorrent value!"); break;
         }
+    }
+}
+
+void readList()
+{
+    ifstream fin("save.txt");
+    while (fin.read((char*)&listOfTeachers[size], sizeof(Teachers)))
+    {
+        size++;
     }
 }
 
@@ -70,6 +92,8 @@ void add() {
         std::cin >> listOfTeachers[size].examTitle;
         printf("\t\tEnter exam date:\t");
         std::cin >> listOfTeachers[size].examDate;
+        listOfTeachers[size].write();
+
         size++;
     }
     else {
