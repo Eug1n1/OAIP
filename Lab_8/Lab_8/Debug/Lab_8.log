@@ -1,0 +1,6 @@
+﻿  Lab_8.cpp
+D:\cpp_projs\OAIP\Lab_8\Lab_8\Lab_8.cpp(186,7): warning C4101: b: неиспользованная локальная переменная
+D:\cpp_projs\OAIP\Lab_8\Lab_8\Lab_8.cpp(185,6): warning C4101: i: неиспользованная локальная переменная
+D:\cpp_projs\OAIP\Lab_8\Lab_8\Lab_8.cpp(300,27): warning C4101: c: неиспользованная локальная переменная
+D:\cpp_projs\OAIP\Lab_8\Lab_8\Lab_8.cpp(300,15): warning C4101: g: неиспользованная локальная переменная
+  Lab_8.vcxproj -> D:\cpp_projs\OAIP\Lab_8\Debug\Lab_8.exe
