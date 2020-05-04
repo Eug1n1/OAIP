@@ -44,7 +44,6 @@ void insert(Address* e, Address** phead, Address** plast) //Добавление
 		e->prev = NULL;
 		*plast = e;
 		*phead = e;
-		return;
 	}
 	else
 	{
@@ -53,6 +52,15 @@ void insert(Address* e, Address** phead, Address** plast) //Добавление
 		e->prev = p;
 		*plast = e;
 	}
+}
+
+void insertEL(Address* e, Address** phead, Address** plast)
+{
+	Address* p = *plast;
+		p->next = e;
+		e->next = NULL;
+		e->prev = p;
+		*plast = e;
 }
 //-----------------------------------------------------------
 Address* setElement()      // Создание элемента и ввод его значений с клавиатуры 
@@ -83,8 +91,27 @@ void outputList(Address** phead, Address** plast)      //Вывод списка
 	}
 	cout << endl;
 }
-//-----------------------------------------------------------
-void find(char name[NAME_SIZE], Address** phead)    // Поиск имени в списке
+
+void inputList(Address** phead1, Address** plast1, Address** phead, Address** plast) {
+	Address* t = *phead1;
+	Address* p = *plast;
+
+	while (t)
+	{
+		Address* temp = new  Address();
+		temp->next = NULL;
+		temp->prev = NULL;
+		strcpy_s(temp->city, t->city);
+		strcpy_s(temp->name, t->name);
+
+		insert(temp, phead, plast);
+
+		t = t->next;
+	}
+	cout << endl;
+}
+
+void find(char name[NAME_SIZE], Address** phead)    
 {
 	Address* t = *phead;
 	while (t)
@@ -180,42 +207,6 @@ void readFromFile(Address** phead, Address** plast)          //Считыван�
 	}
 	fclose(fp);
 }
-void MyTask(char name[NAME_SIZE], char city[CITY_SIZE], Address** phead, Address** plast) {
-	char a[20];
-	int i;
-	char b[100];
-	string min;
-	struct Address* t = *phead;
-
-	cout << "Хотите найти минимальное по длинне слово по городу или по имени?\n";
-	cin >> a;
-	if (strcmp(a, "gorod") == 0) {
-		min = t->city;
-		while (t != NULL) {
-			if (strlen(min.c_str()) > strlen(t->city)) {
-				min = t->city;
-			}
-
-			t = t->next;
-
-		}
-		cout << "Минимальный по длинне город: " << min << endl;
-
-
-	}
-	else {
-		min = t->name;
-		while (t != NULL) {
-			if (strlen(min.c_str()) < strlen(t->name)) {
-				min = t->name;
-			}
-			t = t->next;
-		}
-		cout << "Минимальный по длинне имени: " << min << endl;
-
-	}
-
-}
 
 void addLEnd(Address** phead, Address** plast) {
 	struct Address* t = *phead;
@@ -236,14 +227,11 @@ void addLEnd(Address** phead, Address** plast) {
 		}
 	}
 	cin.ignore(sizeof(char), '\n');
-	outputList(&head1, &last1);
-	while (head1 != NULL) {
-		insert(head1, phead, plast);
-		head1 = head1->next;
-	}
-	Address* a = head1;
+
+	inputList(&head1, &last1, phead, plast);
+
 }
-//-----------------------------------------------------------
+
 int main()
 {
 	Address* head = NULL;
@@ -253,9 +241,11 @@ int main()
 	{
 		switch (menu())
 		{
-		case 1:  insert(setElement(), &head, &last);
+		case 1:  
+			insert(setElement(), &head, &last);
 			break;
-		case 2: {	  char dname[NAME_SIZE];
+		case 2: {	  
+			char dname[NAME_SIZE];
 			cout << "Введите имя: ";
 			cin.getline(dname, NAME_SIZE - 1, '\n');
 			cin.ignore(cin.rdbuf()->in_avail());
@@ -263,9 +253,11 @@ int main()
 			delet(dname, &head, &last);
 		}
 			  break;
-		case 3:  outputList(&head, &last);
+		case 3:  
+			outputList(&head, &last);
 			break;
-		case 4: {	  char fname[NAME_SIZE];
+		case 4: {	  
+			char fname[NAME_SIZE];
 			cout << "Введите имя: ";
 			cin.getline(fname, NAME_SIZE - 1, '\n');
 			cin.ignore(cin.rdbuf()->in_avail());
@@ -273,11 +265,14 @@ int main()
 			find(fname, &head);
 		}
 			  break;
-		case 5:writeToFile(&head);
+		case 5:
+			writeToFile(&head);
 			break;
-		case 6:readFromFile(&head, &last);
+		case 6:
+			readFromFile(&head, &last);
 			break;
-		case 8:char g[20]; char c[20]; addLEnd(&head, &last);
+		case 8:
+			addLEnd(&head, &last);
 			break;
 		case 7:  exit(0);
 		}

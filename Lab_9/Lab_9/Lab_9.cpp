@@ -1,10 +1,8 @@
 ﻿#include <iostream>
-#define DEBUG1
+
 
 int test(int a) {
-#ifdef DEBUG
     std::cout << "вызов функции" << a << std::endl;
-#endif // DEBUG
     return a < 100 ? a + 10 : test(a - 4);
 }
 
