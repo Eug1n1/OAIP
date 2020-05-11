@@ -77,6 +77,7 @@ int main()
 		}
 		case 7:
 		{
+			mainRoot->countR = 0;
 			mainRoot->countRight(mainRoot->node->right);
 			printf("countR = %d", mainRoot->countR);
 			break;

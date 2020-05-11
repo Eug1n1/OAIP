@@ -1,2 +1,5 @@
-﻿  lab_11.cpp
-  lab_11.vcxproj -> C:\Users\User\source\repos\OAIP\lab_11\Debug\lab_11.exe
+﻿  Tree.cpp
+  lab_11.cpp
+  Создание кода...
+D:\cpp_projs\OAIP\lab_11\lab_11\Tree.cpp(198): warning C4715: Tree::Balance: значение возвращается не при всех путях выполнения
+  lab_11.vcxproj -> D:\cpp_projs\OAIP\lab_11\Debug\lab_11.exe

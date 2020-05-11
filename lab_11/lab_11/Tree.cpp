@@ -1,7 +1,5 @@
 #include "Tree.h"
 
-int countR = 0;
-
 //-------------------------------------------------
 void Tree::AddNode(int k)
 {
@@ -71,6 +69,7 @@ void printToFile(Node* t, ofstream& file) {
 	printToFile(t->left, file);
 	printToFile(t->right, file);
 }
+
 void pushFromFile(Node** t, int a) {
 	if ((*t) == NULL) {
 		(*t) = new Node;
