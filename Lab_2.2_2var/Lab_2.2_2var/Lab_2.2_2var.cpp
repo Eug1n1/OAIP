@@ -33,7 +33,6 @@ int main()
                     min[i] = Buff_2[i];
         }
     printf("min: %s\n", min);
-
     fin.close();
     system("pause");
 }
